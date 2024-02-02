@@ -1,11 +1,9 @@
-# Liikuuntapaikka sovellus jossa voi arvostella liikintapaikkoja. Arvostelut auttavat käyttäjää valitsemaan itselle sopivan liikuntapaikan.
+# MoveHel
+Liikuntapaikka sovellus, jossa voi arvostella liikuntapaikkoja Helsingissä. Arvostelut auttavat käyttäjää valitsemaan itselle sopivan liikuntapaikan. 
 
-Rajattu lajivalikoima - mitkä lajit?
-Sunnilleen kaikille mutta aikuisille 
-Liikunan tai uuden lajin aloittelijalle, satunnaiselle liikkujalle, uutta harrastusta/ harrastuspaikkaa etsiville
+Web-pohjainen sovellus.
 
-Rajattu alue: Helsinki
-- 5-10 lajia
-- maksulliset ja maksuttomat 
-
-web-pohjainen (ei appi)
+### Teknologiat:
+- Python Flask backend
+- React frontend
+- PostgreSQL tietokanta

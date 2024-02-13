@@ -9,7 +9,8 @@ export default function AddReview({ onAddReview, onClose }) {
     
     AddReview.propTypes = {
         onReview: PropTypes.func.isRequired,
-        onClose: PropTypes.func.isRequired
+        onClose: PropTypes.func.isRequired,
+        onAddReview: PropTypes.func.isRequired
     };
 
     const handleSave = () => {

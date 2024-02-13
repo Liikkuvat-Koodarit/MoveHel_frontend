@@ -67,11 +67,16 @@ function ListAll() {
             <div>
                 <h2>{data.name}</h2>
                 <p>Tyyppi: {data.type.name}</p>
-                <p>Naapurusto: {data.location.neighborhood}</p>
-                <p>Osoite: {data.location.address}</p>
-                <p>Sähköposti: {data.email}</p>
-                <p>Nettisivu: {data.www}</p>
-                <p>Puhelinnumero: {data.phoneNumber}</p>
+                {data.location.neighborhood &&
+                <p>Naapurusto: {data.location.neighborhood}</p>}
+                {data.location.address &&
+                <p>Osoite: {data.location.address}</p> }
+                {data.email &&
+                <p>Sähköposti: {data.email}</p> }
+                {data.www &&
+                <p>Nettisivu: {data.www}</p>}
+                {data.phoneNumber &&
+                <p>Puhelinnumero: {data.phoneNumber}</p>}
             </div>
         );
     }

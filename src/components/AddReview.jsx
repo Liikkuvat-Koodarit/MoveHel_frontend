@@ -3,22 +3,23 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import PropTypes from 'prop-types';
 
-export default function AddAssessment({ onAddAssessment, onClose }) {
-    const [description, setDescription] = useState('');
+export default function AddReview({ onAddReview, onClose }) {
+    const [reviewText, setReviewText] = useState('');
     const [rating, setRating] = useState(0);
     
-    AddAssessment.propTypes = {
-        onAddAssessment: PropTypes.func.isRequired,
-        onClose: PropTypes.func.isRequired
-      };
+    AddReview.propTypes = {
+        onReview: PropTypes.func.isRequired,
+        onClose: PropTypes.func.isRequired,
+        onAddReview: PropTypes.func.isRequired
+    };
 
     const handleSave = () => {
-        const assessmentData = {
-            description: description,
+        const reviewData = {
+            reviewText: reviewText,
             rating: rating
         };
-        onAddAssessment(assessmentData);
-        setDescription('');
+        onAddReview(reviewData);
+        setReviewText('');
         setRating(0);
         onClose();
     };
@@ -27,22 +28,22 @@ export default function AddAssessment({ onAddAssessment, onClose }) {
         <div>
             <TextField
                 margin="dense"
-                label="Description"
+                label="Kirjoita arviointi"
                 fullWidth
                 variant="standard"
-                value={description}
-                onChange={event => setDescription(event.target.value)}
+                value={reviewText}
+                onChange={event => setReviewText(event.target.value)}
             />
             <TextField
                 margin="dense"
-                label="Rating"
+                label="Tähdet"
                 fullWidth
                 variant="standard"
                 type="number"
                 value={rating}
                 onChange={event => setRating(event.target.value)}
             />
-            <Button onClick={handleSave}>Save Assessment</Button>
+            <Button onClick={handleSave}>Tallenna</Button>
         </div>
     );
 }

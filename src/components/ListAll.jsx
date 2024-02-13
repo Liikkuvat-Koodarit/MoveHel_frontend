@@ -10,6 +10,7 @@ function ListAll() {
     //Luo tyhjän taulukon
     const [sports, setSports] = useState([]);
     const [isReviewOpen, setIsReviewOpen] = useState(false);
+    const [selectedSportsPlace, setSelectedSportsPlace] = useState(null);
     
     //renderöi kerran
     useEffect(() => {
@@ -25,21 +26,18 @@ function ListAll() {
             width: 300, 
             cellRenderer: (params) => {
                 const handleNameClick = () => {
-                    handleReview();
+                    handleReview(params.data);
                 };
 
                 return <span style={{ cursor: 'pointer' }} onClick={handleNameClick}>{params.value}</span>;
             }
         },
         { headerName: "Tyypi", field: "type.name", sortable: true, width: 300 },
-        { headerName: "Naapurusto", valueGetter: "data.location.neighborhood", sortable: true },
         { headerName: "Osoite", valueGetter: "data.location.address", sortable: true },
-        { headerName: "Sähköposti", field: "email", sortable: true },
-        { headerName: "Nettisivu", field: "www", sortable: true },
-        { headerName: "Puhelinnumero", field: "phoneNumber", sortable: true }
+
     ];
 
-    //Hakee datan ja vie sen proxyn läpi ja parsaa sen
+    //Hakee datan ja vie sen proxyn läpi
     const fetchSports = () => {
         const url ='http://lipas.cc.jyu.fi/api/sports-places?fields=schoolUse&fields=email&fields=type.name&fields=location.coordinates.tm35fin&fields=www&fields=location.geometries&fields=name&fields=type.typeCode&fields=location.locationId&fields=freeUse&fields=location.city.name&fields=location.city.cityCode&fields=phoneNumber&fields=location.neighborhood&fields=owner&fields=location.coordinates.wgs84&fields=location.address';
         fetch(`https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`)
@@ -52,16 +50,31 @@ function ListAll() {
 };
 
     const addReview = (reviewData) => {
-        console.log("Saving assessment:", reviewData);
+        console.log("Saving review:", reviewData);
     };
 
-    const handleReview = () => {
+    const handleReview = (sportsPlace) => {
+        setSelectedSportsPlace(sportsPlace);
         setIsReviewOpen(true);
     };
 
     const handleCloseReview = () => {
         setIsReviewOpen(false);
     };
+
+    function Info(data) {
+        return (
+            <div>
+                <h2>{data.name}</h2>
+                <p>Tyyppi: {data.type.name}</p>
+                <p>Naapurusto: {data.location.neighborhood}</p>
+                <p>Osoite: {data.location.address}</p>
+                <p>Sähköposti: {data.email}</p>
+                <p>Nettisivu: {data.www}</p>
+                <p>Puhelinnumero: {data.phoneNumber}</p>
+            </div>
+        );
+    }
 
     return (
         <>
@@ -74,6 +87,7 @@ function ListAll() {
                 />
                 <Dialog open={isReviewOpen} onClose={handleCloseReview}>
                     <DialogContent>
+                        {selectedSportsPlace && <Info {...selectedSportsPlace} />}
                         <AddReview onAddReview={addReview} onClose={handleCloseReview} />
                     </DialogContent>
                 </Dialog>

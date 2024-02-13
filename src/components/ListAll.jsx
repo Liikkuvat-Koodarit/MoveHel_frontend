@@ -2,14 +2,14 @@ import { useState, useEffect } from "react";
 import { AgGridReact } from "ag-grid-react";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-material.css";
-import AddAssessment from "./AddAssessment";
+import AddReview from "./AddReview";
 import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
 
 function ListAll() {
     //Luo tyhjän taulukon
     const [sports, setSports] = useState([]);
-    const [isAddAssessmentOpen, setIsAddAssessmentOpen] = useState(false);
+    const [isReviewOpen, setIsReviewOpen] = useState(false);
     
     //renderöi kerran
     useEffect(() => {
@@ -25,7 +25,7 @@ function ListAll() {
             width: 300, 
             cellRenderer: (params) => {
                 const handleNameClick = () => {
-                    handleAddAssessment();
+                    handleReview();
                 };
 
                 return <span style={{ cursor: 'pointer' }} onClick={handleNameClick}>{params.value}</span>;
@@ -51,16 +51,16 @@ function ListAll() {
         .catch((err) => console.error(err));
 };
 
-    const addAssessment = (assessmentData) => {
-        console.log("Saving assessment:", assessmentData);
+    const addReview = (reviewData) => {
+        console.log("Saving assessment:", reviewData);
     };
 
-    const handleAddAssessment = () => {
-        setIsAddAssessmentOpen(true);
+    const handleReview = () => {
+        setIsReviewOpen(true);
     };
 
-    const handleCloseAssessment = () => {
-        setIsAddAssessmentOpen(false);
+    const handleCloseReview = () => {
+        setIsReviewOpen(false);
     };
 
     return (
@@ -72,9 +72,9 @@ function ListAll() {
                     pagination={true}
                     paginationPageSize={10}
                 />
-                <Dialog open={isAddAssessmentOpen} onClose={handleCloseAssessment}>
+                <Dialog open={isReviewOpen} onClose={handleCloseReview}>
                     <DialogContent>
-                        <AddAssessment onAddAssessment={addAssessment} onClose={handleCloseAssessment} />
+                        <AddReview onAddReview={addReview} onClose={handleCloseReview} />
                     </DialogContent>
                 </Dialog>
             </div>

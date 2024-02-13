@@ -41,19 +41,15 @@ function ListAll() {
 
     //Hakee datan ja vie sen proxyn läpi ja parsaa sen
     const fetchSports = () => {
-        const url ='http://lipas.cc.jyu.fi/api/sports-places?fields=schoolUse&fields=email&fields=type.name&fields=location.coordinates.tm35fin&fields=www&fields=location.geometries&fields=name&fields=type.typeCode&fields=location.locationId&fields=freeUse&fields=location.city.name&fields=location.city.cityCode&fields=phoneNumber&fields=location.neighborhood&fields=owner&fields=location.coordinates.wgs84&fields=location.address&cityCodes=9';
-        fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(url)}`)
-            .then((response) => {
-                if (response.ok) return response.json();
-                else throw new Error("Error fetching sports: " + response.statusText);
-            })
-            .then((data) => {
-                console.log("Data from API:", data);
-                const jsonData = JSON.parse(data.contents);
-                setSports(jsonData);
-            })
-            .catch((err) => console.error(err));
-    };
+        const url ='http://lipas.cc.jyu.fi/api/sports-places?fields=schoolUse&fields=email&fields=type.name&fields=location.coordinates.tm35fin&fields=www&fields=location.geometries&fields=name&fields=type.typeCode&fields=location.locationId&fields=freeUse&fields=location.city.name&fields=location.city.cityCode&fields=phoneNumber&fields=location.neighborhood&fields=owner&fields=location.coordinates.wgs84&fields=location.address';
+        fetch(`https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`)
+        .then((response) => {
+            if (response.ok) return response.json();
+            else throw new Error("Error fetching sports: " + response.statusText);
+        })
+        .then((data) => setSports(data))
+        .catch((err) => console.error(err));
+};
 
     const addAssessment = (assessmentData) => {
         console.log("Saving assessment:", assessmentData);

@@ -11,6 +11,7 @@ function ListAll() {
     //Luo tyhjän taulukon
     const [sports, setSports] = useState([]);
     const [isReviewOpen, setIsReviewOpen] = useState(false);
+    const [selectedSportsPlace, setSelectedSportsPlace] = useState(null);
     const [url, setUrl] = useState('http://lipas.cc.jyu.fi/api/sports-places?fields=schoolUse&fields=email&fields=type.name&fields=location.coordinates.tm35fin&fields=www&fields=location.geometries&fields=name&fields=type.typeCode&fields=location.locationId&fields=freeUse&fields=location.city.name&fields=location.city.cityCode&fields=phoneNumber&fields=location.neighborhood&fields=owner&fields=location.coordinates.wgs84&fields=location.address');
 
 
@@ -28,20 +29,18 @@ function ListAll() {
             width: 300,
             cellRenderer: (params) => {
                 const handleNameClick = () => {
-                    handleReview();
+                    handleReview(params.data);
                 };
 
                 return <span style={{ cursor: 'pointer' }} onClick={handleNameClick}>{params.value}</span>;
             }
         },
         { headerName: "Tyypi", field: "type.name", sortable: true, width: 300 },
-        { headerName: "Naapurusto", valueGetter: "data.location.neighborhood", sortable: true },
         { headerName: "Osoite", valueGetter: "data.location.address", sortable: true },
-        { headerName: "Sähköposti", field: "email", sortable: true },
-        { headerName: "Nettisivu", field: "www", sortable: true },
-        { headerName: "Puhelinnumero", field: "phoneNumber", sortable: true }
+
     ];
-    //Hakee datan ja vie sen proxyn läpi ja parsaa sen
+
+    //Hakee datan ja vie sen proxyn läpi
     const fetchSports = () => {
         fetch(`https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`)
             .then((response) => {
@@ -53,10 +52,11 @@ function ListAll() {
     };
 
     const addReview = (reviewData) => {
-        console.log("Saving assessment:", reviewData);
+        console.log("Saving review:", reviewData);
     };
 
-    const handleReview = () => {
+    const handleReview = (sportsPlace) => {
+        setSelectedSportsPlace(sportsPlace);
         setIsReviewOpen(true);
     };
 
@@ -64,11 +64,29 @@ function ListAll() {
         setIsReviewOpen(false);
     };
 
+    function Info(data) {
+        return (
+            <div>
+                <h2>{data.name}</h2>
+                <p>Tyyppi: {data.type.name}</p>
+                {data.location.neighborhood &&
+                    <p>Naapurusto: {data.location.neighborhood}</p>}
+                {data.location.address &&
+                    <p>Osoite: {data.location.address}</p>}
+                {data.email &&
+                    <p>Sähköposti: {data.email}</p>}
+                {data.www &&
+                    <p>Nettisivu: {data.www}</p>}
+                {data.phoneNumber &&
+                    <p>Puhelinnumero: {data.phoneNumber}</p>}
+            </div>
+        );
+    }
 
     return (
         <>
             <PlaceSearch setUrl={setUrl} />
-            <div className="ag-theme-material" style={{ width: '90%', height: 700, margin: 'auto' }}>
+            <div className="ag-theme-material" style={{ height: "900px", width: "1200px" }}>
                 <AgGridReact
                     rowData={sports}
                     columnDefs={columnDefs}
@@ -77,6 +95,7 @@ function ListAll() {
                 />
                 <Dialog open={isReviewOpen} onClose={handleCloseReview}>
                     <DialogContent>
+                        {selectedSportsPlace && <Info {...selectedSportsPlace} />}
                         <AddReview onAddReview={addReview} onClose={handleCloseReview} />
                     </DialogContent>
                 </Dialog>

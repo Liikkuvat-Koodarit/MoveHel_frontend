@@ -83,13 +83,14 @@ function ListAll() {
 
     return (
         <>
-            <div className="ag-theme-material" style= {{ width: '90%', height: 700, margin: 'auto'}}>
-                <AgGridReact
-                    rowData={sports}
-                    columnDefs={columnDefs}
-                    pagination={true}
-                    paginationPageSize={10}
-                />
+            <div className="ag-theme-material" style={{ height: "900px", width: "1200px"}}>
+    <AgGridReact
+        rowData={sports}
+        columnDefs={columnDefs}
+        pagination={true} // Poistetaan sivutus käytöstä
+
+    />
+
                 <Dialog open={isReviewOpen} onClose={handleCloseReview}>
                     <DialogContent>
                         {selectedSportsPlace && <Info {...selectedSportsPlace} />}

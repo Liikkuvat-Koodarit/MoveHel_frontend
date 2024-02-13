@@ -5,12 +5,13 @@ import "ag-grid-community/styles/ag-theme-material.css";
 import AddAssessment from "./AddAssessment";
 import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
+import PlaceSearch from "./Placesearch";
 
 function ListAll() {
     //Luo tyhjän taulukon
     const [sports, setSports] = useState([]);
     const [isAddAssessmentOpen, setIsAddAssessmentOpen] = useState(false);
-    
+
     //renderöi kerran
     useEffect(() => {
         fetchSports();
@@ -18,11 +19,11 @@ function ListAll() {
 
     //Kolumnit
     const columnDefs = [
-        { 
-            headerName: "Nimi", 
-            field: "name", 
-            sortable: true, 
-            width: 300, 
+        {
+            headerName: "Nimi",
+            field: "name",
+            sortable: true,
+            width: 300,
             cellRenderer: (params) => {
                 const handleNameClick = () => {
                     handleAddAssessment();
@@ -41,7 +42,7 @@ function ListAll() {
 
     //Hakee datan ja vie sen proxyn läpi ja parsaa sen
     const fetchSports = () => {
-        const url ='http://lipas.cc.jyu.fi/api/sports-places?fields=schoolUse&fields=email&fields=type.name&fields=location.coordinates.tm35fin&fields=www&fields=location.geometries&fields=name&fields=type.typeCode&fields=location.locationId&fields=freeUse&fields=location.city.name&fields=location.city.cityCode&fields=phoneNumber&fields=location.neighborhood&fields=owner&fields=location.coordinates.wgs84&fields=location.address&cityCodes=9';
+        const url = 'http://lipas.cc.jyu.fi/api/sports-places?fields=schoolUse&fields=email&fields=type.name&fields=location.coordinates.tm35fin&fields=www&fields=location.geometries&fields=name&fields=type.typeCode&fields=location.locationId&fields=freeUse&fields=location.city.name&fields=location.city.cityCode&fields=phoneNumber&fields=location.neighborhood&fields=owner&fields=location.coordinates.wgs84&fields=location.address&cityCodes=9';
         fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(url)}`)
             .then((response) => {
                 if (response.ok) return response.json();
@@ -67,9 +68,11 @@ function ListAll() {
         setIsAddAssessmentOpen(false);
     };
 
+
     return (
         <>
-            <div className="ag-theme-material" style= {{ width: '90%', height: 700, margin: 'auto'}}>
+            <PlaceSearch />
+            <div className="ag-theme-material" style={{ width: '90%', height: 700, margin: 'auto' }}>
                 <AgGridReact
                     rowData={sports}
                     columnDefs={columnDefs}

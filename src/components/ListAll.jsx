@@ -51,13 +51,28 @@ function ListAll() {
             .catch((err) => console.error(err));
     };
 
-    const addReview = (reviewData) => {
-        console.log("Saving review:", reviewData);
-    };
-
     const handleReview = (sportsPlace) => {
+        console.log("Reviewing:", sportsPlace);
         setSelectedSportsPlace(sportsPlace);
         setIsReviewOpen(true);
+    };
+
+    const addReview = (reviewData) => {
+        fetch('http://localhost:5000/review', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                ...reviewData,
+                sportsPlaceId: selectedSportsPlace.sportsPlaceId
+            })
+        })
+        .then(response => response.json())
+        .then(data => console.log(data))
+        .catch((error) => console.error('Error:', error));
+
+        console.log("Saving review:", reviewData);
     };
 
     const handleCloseReview = () => {
@@ -96,7 +111,7 @@ function ListAll() {
                 <Dialog open={isReviewOpen} onClose={handleCloseReview}>
                     <DialogContent>
                         {selectedSportsPlace && <Info {...selectedSportsPlace} />}
-                        <AddReview onAddReview={addReview} onClose={handleCloseReview} />
+                        <AddReview onAddReview={addReview} onClose={handleCloseReview} sportsPlaceId={selectedSportsPlace ? selectedSportsPlace.sportsPlaceId : null} />
                     </DialogContent>
                 </Dialog>
             </div>

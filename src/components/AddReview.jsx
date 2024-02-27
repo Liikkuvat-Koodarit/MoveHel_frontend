@@ -3,7 +3,7 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import PropTypes from 'prop-types';
 
-export default function AddReview({ onAddReview, onClose }) {
+export default function AddReview({ onAddReview, onClose, sportsPlaceId }) {
     const [reviewText, setReviewText] = useState('');
     const [rating, setRating] = useState(0);
     
@@ -16,12 +16,14 @@ export default function AddReview({ onAddReview, onClose }) {
     const handleSave = () => {
         const reviewData = {
             reviewText: reviewText,
-            rating: rating
+            rating: rating,
+            sportsPlaceId: sportsPlaceId
         };
         onAddReview(reviewData);
         setReviewText('');
         setRating(0);
         onClose();
+        console.log("HANDLE SAVE:", reviewData);
     };
 
     return (

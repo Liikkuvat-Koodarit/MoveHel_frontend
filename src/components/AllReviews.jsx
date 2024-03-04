@@ -19,7 +19,7 @@ function AllReviews() {
         {
             cellRenderer: (params) => (
               <div style={{ display: "flex", gap: "8px" }}>
-                <EditReview editReview={editReview} data={params.data} />
+                <EditReview updateReview={editReview} data={params.data} />
                 <Button
                   size="small"
                   onClick={() => deleteReview(params.data.reviewId)}
@@ -32,6 +32,7 @@ function AllReviews() {
           },
         ]);
 
+        //hakee arvostelut
     const getReviews = () => {
         fetch(rest_url)
         .then(Response => Response.json())
@@ -45,6 +46,7 @@ function AllReviews() {
             })
     };
 
+    //Poistaa arvostelun
     const deleteReview = (id) => {
         console.log(id);
         const url = `http://127.0.0.1:5000/review/${id}`;
@@ -82,6 +84,7 @@ function AllReviews() {
                 >
 
                 </AgGridReact>
+                
             </div>
     );
 }

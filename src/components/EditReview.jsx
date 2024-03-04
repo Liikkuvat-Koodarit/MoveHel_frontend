@@ -1,67 +1,107 @@
-import { useState } from 'react';
-import TextField from '@mui/material/TextField';
+import React from "react";
+
+
 import Button from '@mui/material/Button';
-import PropTypes from 'prop-types';
+import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 
-export default function EditReview({ onEditReview, onClose, data }) {
-    const [reviewText, setReviewText] = useState(data.reviewText);
-    const [rating, setRating] = useState(data.rating);
-    const [open, setOpen] = useState(false);
+export default function EditReview(data) {
+    const [review, setReview] = React.useState({
+        reviewText: '', 
+        rating: '',
 
-    const handleClickOpen = () => {
-        setOpen(true);
+    });
+    const [open, setOpen] = React.useState(false);
+  const handleClickOpen = () => {
+    console.log(data.data.reviewText);
+    console.log(data.data.sportsPlaceId);
+    console.log("testi");
+
+    setReview({
+            reviewText: data.data.reviewText,
+            rating: data.data.rating,
+
+    });
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  
+
+  const handleInputChange = (e) => {
+    setReview({...review,[e.target.name]: e.target.value})
+  }
+
+  const updateReview = () => {
+    const updatedReview = {
+        reviewText: review.reviewText,
+        rating: review.rating
     };
 
-    const handleClose = () => {
-        setOpen(false);
-    };
+    // PUT-requesti
+    fetch(`http://127.0.0.1:5000/review/${data.data.reviewId}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(updatedReview)
+    })
+    .then(response => {
+        if (response.ok) {
 
-    const handleSave = () => {
-        const updatedReview = {
-            ...data,
-            reviewText: reviewText,
-            rating: rating
-        };
-        onEditReview(updatedReview);
-        handleClose();
-    };
+            handleClose();
+        } else {
+            // virhe
+            throw new Error('Review update failed');
+        }
+    })
+    .catch(error => {
+        console.error('Error updating review:', error);
+    });
+};
 
-    return (
+
+    return(
         <div>
-            <Button variant="outlined" onClick={handleClickOpen}>
-                Muokkaa
-            </Button>
-            <Dialog open={open} onClose={handleClose}>
-                <DialogTitle>Muokkaa arvostelua</DialogTitle>
-                <div>
-                    <TextField
-                        margin="dense"
-                        label="Review Text"
-                        fullWidth
-                        variant="standard"
-                        value={reviewText}
-                        onChange={event => setReviewText(event.target.value)}
-                    />
-                    <TextField
-                        margin="dense"
-                        label="Rating"
-                        fullWidth
-                        variant="standard"
-                        type="number"
-                        value={rating}
-                        onChange={event => setRating(event.target.value)}
-                    />
-                    <Button onClick={handleSave}>Save</Button>
-                </div>
-            </Dialog>
+    <React.Fragment>
+      <Button variant="outlined" onClick={handleClickOpen}>
+        Muokkaa
+      </Button>
+      <Dialog open={open} onClose={handleClose}>
+        <DialogTitle>Muokkaa arvostelua</DialogTitle>
+        <DialogContent>
+          <TextField
+            
+            margin="dense"
+            name="reviewText"
+            value={review.reviewText}
+            onChange={e => handleInputChange(e)}
+            label="Arvostelun teksti"
+            fullWidth
+          />
+          <TextField
+            
+            margin="dense"
+            name="rating"
+            value={review.rating}
+            onChange={e => handleInputChange(e)}
+            label="Arvosana"
+            fullWidth
+          />
+          
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose}>Cancel</Button>
+          <Button onClick={updateReview}>Save</Button>
+        </DialogActions>
+      </Dialog>
+    </React.Fragment>
         </div>
     );
 }
-
-EditReview.propTypes = {
-    onEditReview: PropTypes.func.isRequired,
-    onClose: PropTypes.func.isRequired,
-    data: PropTypes.object.isRequired
-};

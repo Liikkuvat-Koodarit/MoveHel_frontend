@@ -18,6 +18,7 @@ export default function EditReview(data) {
   const handleClickOpen = () => {
     console.log(data.data.reviewText);
     console.log(data.data.sportsPlaceId);
+    console.log(data.data.reviewId);
     console.log("testi");
 
     setReview({
@@ -39,33 +40,9 @@ export default function EditReview(data) {
   }
 
   const updateReview = () => {
-    const updatedReview = {
-        reviewText: review.reviewText,
-        rating: review.rating
-    };
-
-    // PUT-requesti
-    fetch(`http://127.0.0.1:5000/review/${data.data.reviewId}`, {
-        method: 'PUT',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(updatedReview)
-    })
-    .then(response => {
-        if (response.ok) {
-
-            handleClose();
-        } else {
-            // virhe
-            throw new Error('Review update failed');
-        }
-    })
-    .catch(error => {
-        console.error('Error updating review:', error);
-    });
-};
-
+    data.updateReview(review, data.data.reviewId);
+    console.log(review);
+    handleClose(); }
 
     return(
         <div>

@@ -19,7 +19,7 @@ function AllReviews() {
         {
             cellRenderer: (params) => (
               <div style={{ display: "flex", gap: "8px" }}>
-                <EditReview updateReview={editReview} data={params.data} />
+                <EditReview updateReview={updateReview} data={params.data} />
                 <Button
                   size="small"
                   onClick={() => deleteReview(params.data.reviewId)}
@@ -63,8 +63,10 @@ function AllReviews() {
         }
     };
 
-    const editReview = (review, link) => {
-        fetch(link, {
+    const updateReview = (review, link) => {
+      console.log(link);
+      console.log(`http://127.0.0.1:5000/review/${link}`);
+        fetch(`http://127.0.0.1:5000/review/${link}`, {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
@@ -73,6 +75,7 @@ function AllReviews() {
         })
           .then(() => getReviews())
           .catch((err) => console.error(err));
+          console.log(`http://127.0.0.1:5000/review/${link}`);
       };
 
     return (

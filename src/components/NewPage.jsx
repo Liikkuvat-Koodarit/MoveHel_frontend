@@ -1,13 +1,13 @@
 import { Button } from "@mui/material";
 
-function NewPage(params) {
+function NewPage(props) {
     //siirtyy seuraavan sataan liikuntapaikkaan
     const nextUrl = () => {
-        const newPage = (params.page + 1);
-        params.setPage(newPage)
+        const newPage = (props.page + 1);
+        props.setPage(newPage)
         const changeUrl = (`http://lipas.cc.jyu.fi/api/sports-places?fields=schoolUse&fields=email&fields=type.name&fields=location.coordinates.tm35fin&fields=www&fields=location.geometries&fields=name&fields=type.typeCode&fields=location.locationId&fields=freeUse&fields=location.city.name&fields=location.city.cityCode&fields=phoneNumber&fields=location.neighborhood&fields=owner&fields=location.coordinates.wgs84&fields=location.address&pageSize=100&cityCode=91&page=${newPage}`)
-        params.setUrl(changeUrl)
-        const gridApi = params.gridApiRef.current;
+        props.setUrl(changeUrl)
+        const gridApi = props.gridApiRef.current;
         if (gridApi) {
             //asettaa gridin ensimmäiselle sivulle
             gridApi.paginationGoToFirstPage();
@@ -15,11 +15,11 @@ function NewPage(params) {
     }
     //siirtyy edelliseen sataan liikuntapaikkaan
     const previousUrl = () => {
-        const newPage = (params.page - 1);
-        params.setPage(newPage)
+        const newPage = (props.page - 1);
+        props.setPage(newPage)
         const changeUrl = (`http://lipas.cc.jyu.fi/api/sports-places?fields=schoolUse&fields=email&fields=type.name&fields=location.coordinates.tm35fin&fields=www&fields=location.geometries&fields=name&fields=type.typeCode&fields=location.locationId&fields=freeUse&fields=location.city.name&fields=location.city.cityCode&fields=phoneNumber&fields=location.neighborhood&fields=owner&fields=location.coordinates.wgs84&fields=location.address&pageSize=100&cityCode=91&page=${newPage}`)
-        params.setUrl(changeUrl)
-        const gridApi = params.gridApiRef.current;
+        props.setUrl(changeUrl)
+        const gridApi = props.gridApiRef.current;
         if (gridApi) {
             //asettaa grdin viimeiselle sivulle
             gridApi.paginationGoToLastPage();

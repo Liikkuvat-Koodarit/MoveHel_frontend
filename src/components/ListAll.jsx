@@ -73,7 +73,8 @@ function ListAll() {
             },
             body: JSON.stringify({
                 ...reviewData,
-                sportsPlaceId: selectedSportsPlace.sportsPlaceId
+                sportsPlaceId: selectedSportsPlace.sportsPlaceId,
+                sportsPlaceName: selectedSportsPlace.name
             })
         })
             .then(response => response.json())

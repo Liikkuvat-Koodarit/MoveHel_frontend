@@ -2,10 +2,24 @@ import { useState } from 'react';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import PropTypes from 'prop-types';
+import { useEffect} from "react";
 
-export default function AddReview({ onAddReview, onClose, sportsPlaceId }) {
+export default function AddReview({ onAddReview, onClose, sportsPlaceId}) {
     const [reviewText, setReviewText] = useState('');
     const [rating, setRating] = useState(0);
+    const [sportsPlaceName, setSportsPlaceName] = useState('');
+
+    useEffect(() => {
+        // Fetch the name of the sports place based on the sportsPlaceId
+        fetch(`http://your-api-url/sportsplaces/${sportsPlaceId}`)
+            .then(response => response.json())
+            .then(data => {
+                setSportsPlaceName(data.name);
+            })
+            .catch(error => {
+                console.error('Error fetching sports place name:', error);
+            });
+    }, [sportsPlaceId]);
     
     AddReview.propTypes = {
         onReview: PropTypes.func.isRequired,
@@ -17,7 +31,8 @@ export default function AddReview({ onAddReview, onClose, sportsPlaceId }) {
         const reviewData = {
             reviewText: reviewText,
             rating: rating,
-            sportsPlaceId: sportsPlaceId
+            sportsPlaceId: sportsPlaceId,
+            sportsPlaceName: sportsPlaceName
         };
         onAddReview(reviewData);
         setReviewText('');

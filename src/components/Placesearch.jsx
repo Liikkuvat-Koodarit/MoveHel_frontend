@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Autocomplete, TextField } from '@mui/material';
 import data from './typecode.json'
 import Button from '@mui/material/Button';
@@ -22,13 +22,13 @@ const PlaceSearch = ({ setUrl }) => {
         setSearchTerm(value);
         setSelectedPlace(placeNumber);
     };
-
+    // vaihtaa url osoitteen sellaiseksi, että se hakee vain valitun lajion paikkoja
     const changeUrl = () => {
-        const newUrl = `http://lipas.cc.jyu.fi/api/sports-places?typeCodes=${selectedPlace}&fields=schoolUse&fields=email&fields=type.name&fields=location.coordinates.tm35fin&fields=www&fields=location.geometries&fields=name&fields=type.typeCode&fields=location.locationId&fields=freeUse&fields=location.city.name&fields=location.city.cityCode&fields=phoneNumber&fields=location.neighborhood&fields=owner&fields=location.coordinates.wgs84&fields=location.address`;
+        const newUrl = `http://lipas.cc.jyu.fi/api/sports-places?typeCodes=${selectedPlace}&fields=schoolUse&fields=email&fields=type.name&fields=location.coordinates.tm35fin&fields=www&fields=location.geometries&fields=name&fields=type.typeCode&fields=location.locationId&fields=freeUse&fields=location.city.name&fields=location.city.cityCode&fields=phoneNumber&fields=location.neighborhood&fields=owner&fields=location.coordinates.wgs84&fields=location.address&pageSize=100&cityCode=91`;
         console.log(newUrl);
         setUrl(newUrl);
     }
-
+    //haku rakenne
     return (
         <div style={{ display: 'flex' }}>
             <Autocomplete
@@ -38,7 +38,7 @@ const PlaceSearch = ({ setUrl }) => {
                 renderInput={(params) => (
                     <TextField
                         {...params}
-                        label="Paikka"
+                        label="Laji"
                         variant="outlined"
                         style={{ width: '600px' }}
                     />

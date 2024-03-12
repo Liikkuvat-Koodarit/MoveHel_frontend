@@ -1,19 +1,22 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { AgGridReact } from "ag-grid-react";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-material.css";
 import AddReview from "./AddReview";
 import Dialog from '@mui/material/Dialog';
+import { Button } from "@mui/material";
 import DialogContent from '@mui/material/DialogContent';
 import PlaceSearch from "./Placesearch";
+import NewPage from "./NewPage";
 
 function ListAll() {
     //Luo tyhjän taulukon
     const [sports, setSports] = useState([]);
     const [isReviewOpen, setIsReviewOpen] = useState(false);
     const [selectedSportsPlace, setSelectedSportsPlace] = useState(null);
-    const [url, setUrl] = useState('http://lipas.cc.jyu.fi/api/sports-places?fields=schoolUse&fields=email&fields=type.name&fields=location.coordinates.tm35fin&fields=www&fields=location.geometries&fields=name&fields=type.typeCode&fields=location.locationId&fields=freeUse&fields=location.city.name&fields=location.city.cityCode&fields=phoneNumber&fields=location.neighborhood&fields=owner&fields=location.coordinates.wgs84&fields=location.address');
-
+    const [page, setPage] = useState(1);
+    const [url, setUrl] = useState(`http://lipas.cc.jyu.fi/api/sports-places?fields=schoolUse&fields=email&fields=type.name&fields=location.coordinates.tm35fin&fields=www&fields=location.geometries&fields=name&fields=type.typeCode&fields=location.locationId&fields=freeUse&fields=location.city.name&fields=location.city.cityCode&fields=phoneNumber&fields=location.neighborhood&fields=owner&fields=location.coordinates.wgs84&fields=location.address&pageSize=100&cityCode=91&page=${page}`);
+    const gridApiRef = useRef(null);
 
     //renderöi kerran
     useEffect(() => {
@@ -44,8 +47,13 @@ function ListAll() {
     const fetchSports = () => {
         fetch(`https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`)
             .then((response) => {
-                if (response.ok) return response.json();
-                else throw new Error("Error fetching sports: " + response.statusText);
+                if (response.ok) {
+                    console.log(page)
+                    return response.json();
+                }
+                else {
+                    throw new Error("Error fetching sports: " + response.statusText);
+                }
             })
             .then((data) => setSports(data))
             .catch((err) => console.error(err));
@@ -68,9 +76,9 @@ function ListAll() {
                 sportsPlaceId: selectedSportsPlace.sportsPlaceId
             })
         })
-        .then(response => response.json())
-        .then(data => console.log(data))
-        .catch((error) => console.error('Error:', error));
+            .then(response => response.json())
+            .then(data => console.log(data))
+            .catch((error) => console.error('Error:', error));
 
         console.log("Saving review:", reviewData);
     };
@@ -107,7 +115,11 @@ function ListAll() {
                     columnDefs={columnDefs}
                     pagination={true}
                     paginationPageSize={10}
+                    onGridReady={(params) => {
+                        gridApiRef.current = params.api;
+                    }}
                 />
+                <NewPage setUrl={setUrl} setPage={setPage} gridApiRef={gridApiRef} page={page} />
                 <Dialog open={isReviewOpen} onClose={handleCloseReview}>
                     <DialogContent>
                         {selectedSportsPlace && <Info {...selectedSportsPlace} />}

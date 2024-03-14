@@ -8,6 +8,7 @@ import { Button } from "@mui/material";
 import DialogContent from '@mui/material/DialogContent';
 import PlaceSearch from "./Placesearch";
 import NewPage from "./NewPage";
+import PlaceReviews from "./PlaceReviews";
 
 function ListAll() {
     //Luo tyhjän taulukon
@@ -125,6 +126,7 @@ function ListAll() {
                     <DialogContent>
                         {selectedSportsPlace && <Info {...selectedSportsPlace} />}
                         <AddReview onAddReview={addReview} onClose={handleCloseReview} sportsPlaceId={selectedSportsPlace ? selectedSportsPlace.sportsPlaceId : null} />
+                        <PlaceReviews sportsPlaceId={selectedSportsPlace ? selectedSportsPlace.sportsPlaceId : null} />
                     </DialogContent>
                 </Dialog>
             </div>

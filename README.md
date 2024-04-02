@@ -8,6 +8,7 @@ Tällä hetkellä käyttäjä pystyy:
 - Hakemaan liikuntapaikkoja tyypin perusteella, esim. Kuntokeskus, pallokenttä tai liikuntapuisto.
 - Näkemään liikuntapaikan tiedot klikkaamalla paikkaa.
 - Lähettämään kirjallisen ja numerollisen arvostelun.
+- Rekisteröitymään
 
 ### Teknologiat:
 - Python Flask backend

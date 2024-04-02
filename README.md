@@ -9,6 +9,8 @@ Tällä hetkellä käyttäjä pystyy:
 - Näkemään liikuntapaikan tiedot klikkaamalla paikkaa.
 - Lähettämään kirjallisen ja numerollisen arvostelun.
 - Rekisteröitymään
+- Näkemään tietyn liikuntapaikan arvostelut
+- Lisäämään, muokkaamaan ja poistamaan arvosteluja
 
 ### Teknologiat:
 - Python Flask backend

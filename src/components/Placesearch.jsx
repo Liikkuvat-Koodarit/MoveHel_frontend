@@ -30,7 +30,7 @@ const PlaceSearch = ({ setUrl }) => {
     }
     //haku rakenne
     return (
-        <div style={{ display: 'flex' }}>
+        <div style={{ display: 'left' }}>
             <Autocomplete
                 value={searchTerm}
                 options={options}

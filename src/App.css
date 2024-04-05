@@ -55,6 +55,28 @@
   justify-content: center; 
   align-items: center; 
 }
+
+.container {
+  display: flex;
+  flex-direction: row;
+}
+
+.search-bar {
+  width: 300px;
+  padding: 10px;
+  margin-right: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.content {
+  flex: 1;
+}
+
+.tabs {
+  padding-bottom: 30px;
+}
+
+
 /* -ms-input-placeholder {
   color: #999;
 } */

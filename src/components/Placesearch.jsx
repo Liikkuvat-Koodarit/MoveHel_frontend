@@ -24,9 +24,13 @@ const PlaceSearch = ({ setUrl }) => {
     };
     // vaihtaa url osoitteen sellaiseksi, että se hakee vain valitun lajion paikkoja
     const changeUrl = () => {
+        if (selectedPlace!=null && selectedPlace !== '') {
         const newUrl = `http://lipas.cc.jyu.fi/api/sports-places?typeCodes=${selectedPlace}&fields=schoolUse&fields=email&fields=type.name&fields=location.coordinates.tm35fin&fields=www&fields=location.geometries&fields=name&fields=type.typeCode&fields=location.locationId&fields=freeUse&fields=location.city.name&fields=location.city.cityCode&fields=phoneNumber&fields=location.neighborhood&fields=owner&fields=location.coordinates.wgs84&fields=location.address&pageSize=100&cityCode=91`;
         console.log(newUrl);
         setUrl(newUrl);
+        } else {
+            console.log("No sport selected")
+        }
     }
     //haku rakenne
     return (

@@ -2,9 +2,10 @@ import { useState } from 'react';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import PropTypes from 'prop-types';
-import { useEffect} from "react";
+import { useEffect } from "react";
+import Rating from '@mui/material/Rating';
 
-export default function AddReview({ onAddReview, onClose, sportsPlaceId}) {
+export default function AddReview({ onAddReview, onClose, sportsPlaceId }) {
     const [reviewText, setReviewText] = useState('');
     const [rating, setRating] = useState(0);
     const [sportsPlaceName, setSportsPlaceName] = useState('');
@@ -20,7 +21,7 @@ export default function AddReview({ onAddReview, onClose, sportsPlaceId}) {
                 console.error('Error fetching sports place name:', error);
             });
     }, [sportsPlaceId]);
-    
+
     AddReview.propTypes = {
         onReview: PropTypes.func.isRequired,
         onClose: PropTypes.func.isRequired,
@@ -51,16 +52,16 @@ export default function AddReview({ onAddReview, onClose, sportsPlaceId}) {
                 value={reviewText}
                 onChange={event => setReviewText(event.target.value)}
             />
-            <TextField
-                margin="dense"
-                label="Tähdet"
-                fullWidth
-                variant="standard"
-                type="number"
+            <Rating
+                name="rating"
                 value={rating}
-                onChange={event => setRating(event.target.value)}
+                onChange={(event, newValue) => {
+                    setRating(newValue);
+                }}
             />
-            <Button onClick={handleSave}>Tallenna</Button>
+            <div style={{ marginTop: '10px' }}>
+                <Button onClick={handleSave}>Tallenna</Button> 
+            </div>
         </div>
     );
 }

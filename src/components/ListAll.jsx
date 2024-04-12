@@ -40,7 +40,6 @@ function ListAll() {
             }
         },
         { headerName: "Tyypi", field: "type.name", sortable: true, width: 300 },
-        { headerName: "Osoite", valueGetter: "data.location.address", sortable: true },
 
     ];
 

@@ -115,21 +115,23 @@ function ListAll() {
                 <AgGridReact
                     rowData={sports}
                     columnDefs={columnDefs}
-                    pagination={true}
-                    paginationPageSize={10}
+                    suppressPaginationPanel={true}
+                    paginationPageSize={100}
                     onGridReady={(params) => {
                         gridApiRef.current = params.api;
                     }}
+
                 />
                 <NewPage setUrl={setUrl} setPage={setPage} gridApiRef={gridApiRef} page={page} />
-                <Dialog open={isReviewOpen} onClose={handleCloseReview}>
-                    <DialogContent>
-                        {selectedSportsPlace && <Info {...selectedSportsPlace} />}
-                        <AddReview onAddReview={addReview} onClose={handleCloseReview} sportsPlaceId={selectedSportsPlace ? selectedSportsPlace.sportsPlaceId : null} />
-                        <PlaceReviews sportsPlaceId={selectedSportsPlace ? selectedSportsPlace.sportsPlaceId : null} />
-                    </DialogContent>
-                </Dialog>
+
             </div>
+            <Dialog open={isReviewOpen} onClose={handleCloseReview}>
+                <DialogContent>
+                    {selectedSportsPlace && <Info {...selectedSportsPlace} />}
+                    <AddReview onAddReview={addReview} onClose={handleCloseReview} sportsPlaceId={selectedSportsPlace ? selectedSportsPlace.sportsPlaceId : null} />
+                    <PlaceReviews sportsPlaceId={selectedSportsPlace ? selectedSportsPlace.sportsPlaceId : null} />
+                </DialogContent>
+            </Dialog>
         </>
     );
 }

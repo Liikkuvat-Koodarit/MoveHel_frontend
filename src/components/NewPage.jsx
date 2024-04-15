@@ -27,8 +27,7 @@ function NewPage(props) {
     }
     //Rakenne missä on nappulat ja ohjeistus niiden käyttöön
     return (
-        <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-            <h3>Kun olet viimeisellä sivulla paina 'Seuraava' nähdäksesi lisää paikkoja tai paina 'Edellinen' jos haluat mennä takaisin edellisiin</h3>
+        <div style={{ display: 'flex', justifyContent: 'space-between', width: '500px' }}>
             <Button
                 onClick={previousUrl}>
                 Edellinen</Button>

@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import './App.css';
 import AllReviews from './components/AllReviews';
 import ListAll from './components/ListAll';
-import Map from './components/Map';
 import AddUser from './components/AddUser';
 import Login from './components/Login';
 
@@ -41,50 +40,49 @@ function App() {
         ...loginData
       })
     })
-    .then(response => {
-      if (response.ok){
-        setLoggedIn(true);
+      .then(response => {
+        if (response.ok) {
+          setLoggedIn(true);
           console.log("Login successful");
         } else {
           console.error("Login failed");
         }
-    })
-    .catch((error) => alert("Error:", error));
+      })
+      .catch((error) => alert("Error:", error));
   }
 
   const logout = () => {
     fetch('http://localhost:5000/logout', {
       method: 'GET',
     })
-    .then(response => {
-      if (response.ok) {
-        setLoggedIn(false)
-        console.log("Logout successful");
-      } else {
-        console.error("Logout failed");
-      }
-    })
-    .catch(error => console.error("Error:", error));
+      .then(response => {
+        if (response.ok) {
+          setLoggedIn(false)
+          console.log("Logout successful");
+        } else {
+          console.error("Logout failed");
+        }
+      })
+      .catch(error => console.error("Error:", error));
   };
 
   return (
     <div className='tabContainer'>
-      <Map />
       <div className="tabs">
         <button onClick={() => handleTabChange("home")}>Etusivu</button>
         <button onClick={() => handleTabChange("reviews")}>Arvostelut</button>
       </div>
       {loggedIn ? (
-          <>
+        <>
           <h3>Olet kirjautunut sisään</h3>
           <button onClick={logout}>Kirjaudu ulos</button>
-          </>
-        ) : (
-          <>
-            <Login onLogin={login}/>
-            <AddUser onAddUser={addUser}/>
-          </>  
-        )}
+        </>
+      ) : (
+        <>
+          <Login onLogin={login} />
+          <AddUser onAddUser={addUser} />
+        </>
+      )}
       {selectedTab === "home" && <ListAll />}
       {selectedTab === "reviews" && <AllReviews />}
     </div>

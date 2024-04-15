@@ -9,6 +9,7 @@ import DialogContent from '@mui/material/DialogContent';
 import PlaceSearch from "./Placesearch";
 import NewPage from "./NewPage";
 import PlaceReviews from "./PlaceReviews";
+import Map from "./Map";
 
 function ListAll() {
     //Luo tyhjän taulukon
@@ -111,6 +112,8 @@ function ListAll() {
     return (
         <>
             <PlaceSearch setUrl={setUrl} />
+            <Map
+                sports={sports} />
             <div className="ag-theme-material" style={{ height: "900px", width: "1200px" }}>
                 <AgGridReact
                     rowData={sports}

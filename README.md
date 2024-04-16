@@ -7,7 +7,7 @@ Tällä hetkellä käyttäjä pystyy:
 - Näkemään listan liikuntapaikoista.
 - Hakemaan liikuntapaikkoja tyypin perusteella, esim. Kuntokeskus, pallokenttä tai liikuntapuisto.
 - Näkemään liikuntapaikan tiedot klikkaamalla paikkaa.
-- Lähettämään kirjallisen ja numerollisen arvostelun.
+- Lähettämään kirjallisen ja tähdellisen arvostelun.
 - Rekisteröitymään
 - Näkemään tietyn liikuntapaikan arvostelut
 - Lisäämään, muokkaamaan ja poistamaan arvosteluja

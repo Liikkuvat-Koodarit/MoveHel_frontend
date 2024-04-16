@@ -100,9 +100,9 @@ function ListAll() {
                 {data.location.address &&
                     <p>Osoite: {data.location.address}</p>}
                 {data.email &&
-                    <p>Sähköposti: {data.email}</p>}
+                     <p>Sähköposti: <a href={`mailto:${data.email}`}>{data.email}</a></p>}
                 {data.www &&
-                    <p>Nettisivu: {data.www}</p>}
+                    <p>Nettisivu: <a href={data.www}>{data.www}</a></p>}
                 {data.phoneNumber &&
                     <p>Puhelinnumero: {data.phoneNumber}</p>}
             </div>

@@ -7,7 +7,7 @@ import Login from './components/Login';
 
 function App() {
   const [selectedTab, setSelectedTab] = useState("home");
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [loggedInUser, setloggedInUser] = useState({userId: null, userName: "", email: "", is_admin: false });
 
   const handleTabChange = (newTab) => {
     setSelectedTab(newTab);
@@ -40,31 +40,47 @@ function App() {
         ...loginData
       })
     })
-      .then(response => {
-        if (response.ok) {
-          setLoggedIn(true);
-          console.log("Login successful");
-        } else {
-          console.error("Login failed");
-        }
-      })
-      .catch((error) => alert("Error:", error));
+    .then(response => {
+      if (response.ok) {
+        return response.json();
+      } else {
+        throw new Error('Network response was not ok');
+      }
+    })
+    .then(data => {
+      if (data.userId != null) { 
+        const user = {userId: data.userId, userName: data.userName, email: data.email, is_admin: data.is_admin};
+        setloggedInUser(user);
+        console.log("User:", user);
+        console.log("Login successful");
+      } else {
+        console.error("Login failed");
+      }
+    })
+    .catch((error) => console.error("Error:", error));
   }
 
-  const logout = () => {
+const logout = () => {
     fetch('http://localhost:5000/logout', {
       method: 'GET',
     })
       .then(response => {
         if (response.ok) {
-          setLoggedIn(false)
           console.log("Logout successful");
+          return Promise.resolve();
         } else {
           console.error("Logout failed");
+          throw new Error("Logout failed");
         }
+      })
+      .then(() => {
+        const user = { userId: null, userName: "", email: "", is_admin: false };
+        setloggedInUser(user);
+        console.log("User:", user);
       })
       .catch(error => console.error("Error:", error));
   };
+
 
   return (
     <div className='tabContainer'>
@@ -72,7 +88,7 @@ function App() {
         <button onClick={() => handleTabChange("home")}>Etusivu</button>
         <button onClick={() => handleTabChange("reviews")}>Arvostelut</button>
       </div>
-      {loggedIn ? (
+      {loggedInUser.userId !== null ? (
         <>
           <h3>Olet kirjautunut sisään</h3>
           <button onClick={logout}>Kirjaudu ulos</button>

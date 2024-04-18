@@ -34,7 +34,7 @@ const PlaceSearch = ({ setUrl }) => {
     }
     //haku rakenne
     return (
-        <div style={{ display: 'left' }}>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             <Autocomplete
                 value={searchTerm}
                 options={options}
@@ -42,17 +42,18 @@ const PlaceSearch = ({ setUrl }) => {
                 renderInput={(params) => (
                     <TextField
                         {...params}
-                        label="Laji"
+                        label="Paikka"
                         variant="outlined"
-                        style={{ width: '600px' }}
+                        style={{ width: '600px', marginRight: '10px' }}
+                       
                     />
-
-
-                )} />
+                )}
+            />
             <Button
                 variant="contained"
                 color="primary"
                 onClick={changeUrl}
+                style={{ minWidth: '50px', height: '55px' }}
             >
                 <SearchIcon />
             </Button>

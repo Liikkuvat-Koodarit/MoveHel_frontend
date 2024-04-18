@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-
-
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
@@ -10,9 +8,9 @@ import DialogTitle from '@mui/material/DialogTitle';
 import PropTypes from 'prop-types';
 
 export default function AddUser({onAddUser}) {
-    const [username,setUsername] = useState('');
-    const [email,setEmail] = useState('');
-    const [password,setPassword] = useState('');
+    const [username, setUsername] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
     const [open, setOpen] = React.useState(false);
 
     const handleSave = () => {
@@ -31,60 +29,56 @@ export default function AddUser({onAddUser}) {
 
     const handleClickOpen = () => {
         setOpen(true);
-      };
-    
-      const handleClose = () => {
+    };
+
+    const handleClose = () => {
         setOpen(false);
-      };
-    
-      AddUser.propTypes = {
+    };
+
+    AddUser.propTypes = {
         onAddUser: PropTypes.func.isRequired
     };
 
-    return(
-        <div>
-    <React.Fragment>
-      <Button variant="outlined" onClick={handleClickOpen}>
-        Rekisteröidy
-      </Button>
-      <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>Rekisteröidy</DialogTitle>
-        <DialogContent>
-          <TextField
-            
-            margin="dense"
-            name="username"
-            value={username}
-            onChange={event => setUsername(event.target.value)}
-            label="Käyttäjänimi"
-            fullWidth
-          />
-          <TextField
-            
-            margin="dense"
-            name="email"
-            value={email}
-            onChange={event => setEmail(event.target.value)}
-            label="Sähköposti"
-            fullWidth
-          />
-          <TextField
-            
-            margin="dense"
-            name="password"
-            value={password}
-            onChange={event => setPassword(event.target.value)}
-            label="Salasana"
-            fullWidth
-          />
-          
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={handleSave}>Tallenna</Button>
-        </DialogActions>
-      </Dialog>
-    </React.Fragment>
+    return (
+      <div>
+        <div style={{ float: 'right' }}>
+            <Button  onClick={handleClickOpen}>
+                Rekisteröidy
+            </Button>
+        </div>
+            <Dialog open={open} onClose={handleClose}>
+                <DialogTitle>Rekisteröidy</DialogTitle>
+                <DialogContent>
+                    <TextField
+                        margin="dense"
+                        name="username"
+                        value={username}
+                        onChange={event => setUsername(event.target.value)}
+                        label="Käyttäjänimi"
+                        fullWidth
+                    />
+                    <TextField
+                        margin="dense"
+                        name="email"
+                        value={email}
+                        onChange={event => setEmail(event.target.value)}
+                        label="Sähköposti"
+                        fullWidth
+                    />
+                    <TextField
+                        margin="dense"
+                        name="password"
+                        value={password}
+                        onChange={event => setPassword(event.target.value)}
+                        label="Salasana"
+                        fullWidth
+                    />
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={handleClose}>Cancel</Button>
+                    <Button onClick={handleSave}>Tallenna</Button>
+                </DialogActions>
+            </Dialog>
         </div>
     );
 }

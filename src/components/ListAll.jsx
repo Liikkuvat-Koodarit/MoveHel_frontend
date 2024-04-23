@@ -55,10 +55,10 @@ function ListAll() {
             }
         },
         {
-            headerName: "Nimi",
+            headerName: "",
             field: "name",
             sortable: false,
-            width: 300,
+            width: 400,
             cellRenderer: (params) => {
                 const handleNameClick = () => {
                     handleReview(params.data);
@@ -69,8 +69,6 @@ function ListAll() {
                 )
             }
         },
-        { headerName: "Tyypi", field: "type.name", sortable: false, width: 300 },
-
     ];
 
     //Hakee datan ja vie sen proxyn läpi
@@ -144,7 +142,7 @@ function ListAll() {
             <Map
                 sports={sports} index={popUpIndex}
             />
-            <div className="ag-theme-material" style={{ height: "900px", width: "1200px" }}>
+            <div className="ag-theme-material" style={{ height: "103vh", width: "1200px" }}>
                 <AgGridReact
                     rowData={sports}
                     columnDefs={columnDefs}

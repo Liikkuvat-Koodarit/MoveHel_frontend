@@ -48,24 +48,18 @@ function App() {
       }
     })
     .then(data => {
-      console.log("Response data:", data);
-      if (data.message === "Logged in successfully") { 
-          const user = {
-              userId: data.userId, 
-              userName: data.userName,
-              email: data.email,
-              is_admin: data.is_admin
-          };
-          setloggedInUser(user);
-          console.log("User:", user);
-          console.log("Login successful");
+      if (data.userId != null) { 
+        const user = {userId: data.userId, userName: data.userName, email: data.email, is_admin: data.is_admin};
+        setloggedInUser(user);
+        console.log("User:", user);
+        console.log("Login successful");
       } else {
         console.error("Login failed");
       }
     })
     .catch((error) => console.error("Error:", error));
   }
-
+  
 const logout = () => {
     fetch('http://localhost:5000/logout', {
       method: 'GET',

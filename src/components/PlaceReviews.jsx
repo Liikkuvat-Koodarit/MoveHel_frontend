@@ -1,20 +1,16 @@
-
 import { useState, useEffect } from 'react';
 import Rating from '@mui/material/Rating';
 import Box from '@mui/material/Box';
 
-export default function PlaceReviews(sportsPlaceId) {
-
+export default function PlaceReviews({ sportsPlaceId }) {
     const [reviews, setReviews] = useState([]);
     const [loading, setLoading] = useState(true);
-    const id = sportsPlaceId.sportsPlaceId;
-    console.log(id)
+    const id = sportsPlaceId;
 
     useEffect(() => {
         async function fetchReviews() {
             try {
                 const response = await fetch(`http://127.0.0.1:5000/location/review?sportsPlaceId=${id}`);
-                console.log(`http://127.0.0.1:5000/location/review?sportsPlaceId=${id}`)
                 if (!response.ok) {
                     throw new Error('Failed to fetch reviews');
                 }
@@ -26,7 +22,6 @@ export default function PlaceReviews(sportsPlaceId) {
                 setLoading(false);
             }
         }
-
         fetchReviews();
     }, [id]);
 
@@ -34,23 +29,25 @@ export default function PlaceReviews(sportsPlaceId) {
         return <div>Loading...</div>;
     }
 
+    // Calculate average rating
+    const totalRating = reviews.reduce((sum, review) => sum + review.rating, 0);
+    const averageRating = totalRating / reviews.length;
+
     return (
         <div>
             <h2>Arvostelut</h2>
+            <p style={{ fontSize: '20px', fontWeight: 'bold' }}>Arvosteluiden keskiarvo: <Rating value={averageRating.toFixed(1)} readOnly /></p>
             <ul style={{ listStyleType: 'none', padding: 0 }}>
                 {reviews.map(review => (
-                    
-                   <li key={review.reviewId}>
-                   <Box border={4} p={2} mb={2}>
-                       <h2 style={{ fontFamily: 'Poppins'}}>{review.userName}</h2>
-                       <p style={{ fontFamily: 'Arial, sans-serif' , padding: '1px 0' }}>{review.reviewText}</p> <br/>
-                       <Rating value={review.rating} readOnly />
-                   </Box>
-               </li>
+                    <li key={review.reviewId}>
+                        <Box border={4} p={2} mb={2}>
+                            <h2>{review.userName}</h2>
+                            <p>{review.reviewText}</p>
+                            <Rating value={review.rating} readOnly />
+                        </Box>
+                    </li>
                 ))}
             </ul>
         </div>
     );
 }
-
-

@@ -57,7 +57,7 @@ function ListAll() {
         {
             headerName: "Nimi",
             field: "name",
-            sortable: true,
+            sortable: false,
             width: 300,
             cellRenderer: (params) => {
                 const handleNameClick = () => {
@@ -69,7 +69,7 @@ function ListAll() {
                 )
             }
         },
-        { headerName: "Tyypi", field: "type.name", sortable: true, width: 300 },
+        { headerName: "Tyypi", field: "type.name", sortable: false, width: 300 },
 
     ];
 

@@ -70,6 +70,9 @@ function ListAll() {
             }
         },
     ];
+    const gridOptions = {
+        headerHeight: 0
+    }
 
     //Hakee datan ja vie sen proxyn läpi
     const fetchSports = () => {
@@ -142,12 +145,13 @@ function ListAll() {
             <Map
                 sports={sports} index={popUpIndex}
             />
-            <div className="ag-theme-material" style={{ height: "103vh", width: "1200px" }}>
+            <div className="ag-theme-material" style={{ height: "95vh", width: "1200px", marginTop: 30 }}>
                 <AgGridReact
                     rowData={sports}
                     columnDefs={columnDefs}
                     suppressPaginationPanel={true}
                     paginationPageSize={100}
+                    gridOptions={gridOptions}
                     onGridReady={(params) => {
                         gridApiRef.current = params.api;
                     }}

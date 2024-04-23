@@ -53,7 +53,7 @@ export default function Map({ sports, index }) {
 
 
   return (
-    <div id="map" style={{ width: '50%', height: '100vh', float: 'right', marginTop: 55 }}></div>
+    <div id="map" style={{ width: '50%', height: '100vh', float: 'right', marginTop: 30 }}></div>
 
   )
 };

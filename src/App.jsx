@@ -84,6 +84,7 @@ const logout = () => {
 
   return (
     <div className='tabContainer'>
+      <hi1>MOVEHEL</hi1>
       <div className="tabs">
         <button onClick={() => handleTabChange("home")}>Etusivu</button>
         <button onClick={() => handleTabChange("reviews")}>Arvostelut</button>

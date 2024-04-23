@@ -4,8 +4,10 @@ import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
 
 
-export default function Map({ sports }) {
+export default function Map({ sports, index }) {
   const mapRef = useRef(null);
+  const markerRefs = useRef([])
+
 
   useEffect(() => {
 
@@ -21,6 +23,7 @@ export default function Map({ sports }) {
       if (layer instanceof L.Marker) {
         mapRef.current.removeLayer(layer);
       }
+      markerRefs.current = [];
     });
 
 
@@ -33,8 +36,20 @@ export default function Map({ sports }) {
       </div>`
         )
         .bindTooltip(location.name);
+      markerRefs.current.push(marker);
     });
+
+
   }, [sports]);
+  useEffect(() => {
+    const openPopup = (index) => {
+      if (markerRefs.current.length > 0 && index !== null && index !== undefined) {
+        markerRefs.current[index].openPopup();
+      }
+    }
+    openPopup(index);
+  }, [index])
+
 
 
   return (

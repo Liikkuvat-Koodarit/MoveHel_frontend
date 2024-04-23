@@ -4,12 +4,13 @@ import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-material.css";
 import AddReview from "./AddReview";
 import Dialog from '@mui/material/Dialog';
-import { Button } from "@mui/material";
+import { Button, IconButton } from "@mui/material";
 import DialogContent from '@mui/material/DialogContent';
 import PlaceSearch from "./Placesearch";
 import NewPage from "./NewPage";
 import PlaceReviews from "./PlaceReviews";
 import Map from "./Map";
+import PlaceIcon from '@mui/icons-material/Place';
 
 function ListAll() {
     //Luo tyhjän taulukon
@@ -17,6 +18,7 @@ function ListAll() {
     const [isReviewOpen, setIsReviewOpen] = useState(false);
     const [selectedSportsPlace, setSelectedSportsPlace] = useState(null);
     const [page, setPage] = useState(1);
+    const [popUpIndex, setPopUpIndex] = useState();
     const [url, setUrl] = useState(`http://lipas.cc.jyu.fi/api/sports-places?fields=schoolUse&fields=email&fields=type.name&fields=location.coordinates.tm35fin&fields=www&fields=location.geometries&fields=name&fields=type.typeCode&fields=location.locationId&fields=freeUse&fields=location.city.name&fields=location.city.cityCode&fields=phoneNumber&fields=location.neighborhood&fields=owner&fields=location.coordinates.wgs84&fields=location.address&pageSize=100&cityCodes=91&page=${page}`);
     const gridApiRef = useRef(null);
 
@@ -25,8 +27,33 @@ function ListAll() {
         fetchSports();
     }, [url]);
 
+    //Markerin korotus
+    const openPopUp = () => {
+
+    }
+
     //Kolumnit
     const columnDefs = [
+        {
+            headerName: '',
+            field: 'button',
+            sortable: false,
+            width: 100,
+            cellRenderer: (params) => {
+                const handleButtonClick = () => {
+                    // Kutsu napin painalluksen käsittelijäfunktiota tässä
+                    console.log('Button clicked for row:', params.data);
+                    console.log(params.node.rowIndex)
+                    setPopUpIndex(params.node.rowIndex)
+                };
+
+                return (
+                    <IconButton aria-label="place" onClick={handleButtonClick}>
+                        <PlaceIcon />
+                    </IconButton>
+                );
+            }
+        },
         {
             headerName: "Nimi",
             field: "name",
@@ -37,7 +64,9 @@ function ListAll() {
                     handleReview(params.data);
                 };
 
-                return <span style={{ cursor: 'pointer' }} onClick={handleNameClick}>{params.value}</span>;
+                return (
+                    <span style={{ cursor: 'pointer' }} onClick={handleNameClick}>{params.value}</span>
+                )
             }
         },
         { headerName: "Tyypi", field: "type.name", sortable: true, width: 300 },
@@ -100,7 +129,7 @@ function ListAll() {
                 {data.location.address &&
                     <p>Osoite: {data.location.address}</p>}
                 {data.email &&
-                     <p>Sähköposti: <a href={`mailto:${data.email}`}>{data.email}</a></p>}
+                    <p>Sähköposti: <a href={`mailto:${data.email}`}>{data.email}</a></p>}
                 {data.www &&
                     <p>Nettisivu: <a href={data.www}>{data.www}</a></p>}
                 {data.phoneNumber &&
@@ -113,7 +142,8 @@ function ListAll() {
         <>
             <PlaceSearch setUrl={setUrl} />
             <Map
-                sports={sports} />
+                sports={sports} index={popUpIndex}
+            />
             <div className="ag-theme-material" style={{ height: "900px", width: "1200px" }}>
                 <AgGridReact
                     rowData={sports}

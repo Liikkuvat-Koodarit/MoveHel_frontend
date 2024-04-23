@@ -12,7 +12,7 @@ import PlaceReviews from "./PlaceReviews";
 import Map from "./Map";
 import PlaceIcon from '@mui/icons-material/Place';
 
-function ListAll() {
+function ListAll({loggedInUser}) {
     //Luo tyhjän taulukon
     const [sports, setSports] = useState([]);
     const [isReviewOpen, setIsReviewOpen] = useState(false);
@@ -97,6 +97,7 @@ function ListAll() {
     };
 
     const addReview = (reviewData) => {
+        console.log("Adding review:", reviewData);
         fetch('http://localhost:5000/review', {
             method: 'POST',
             headers: {
@@ -163,7 +164,7 @@ function ListAll() {
             <Dialog open={isReviewOpen} onClose={handleCloseReview}>
                 <DialogContent>
                     {selectedSportsPlace && <Info {...selectedSportsPlace} />}
-                    <AddReview onAddReview={addReview} onClose={handleCloseReview} sportsPlaceId={selectedSportsPlace ? selectedSportsPlace.sportsPlaceId : null} />
+                    <AddReview onAddReview={addReview} onClose={handleCloseReview} sportsPlaceId={selectedSportsPlace ? selectedSportsPlace.sportsPlaceId : null} loggedInUser={loggedInUser} />
                     <PlaceReviews sportsPlaceId={selectedSportsPlace ? selectedSportsPlace.sportsPlaceId : null} />
                 </DialogContent>
             </Dialog>

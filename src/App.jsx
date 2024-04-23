@@ -99,7 +99,7 @@ const logout = () => {
           <AddUser onAddUser={addUser} />
         </>
       )}
-      {selectedTab === "home" && <ListAll />}
+      {selectedTab === "home" && <ListAll loggedInUser={loggedInUser} />}
       {selectedTab === "reviews" && <AllReviews />}
     </div>
   );

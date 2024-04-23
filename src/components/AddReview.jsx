@@ -1,14 +1,14 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import PropTypes from 'prop-types';
-import { useEffect } from "react";
 import Rating from '@mui/material/Rating';
 
-export default function AddReview({ onAddReview, onClose, sportsPlaceId }) {
+export default function AddReview({ onAddReview, onClose, sportsPlaceId, loggedInUser }) {
     const [reviewText, setReviewText] = useState('');
     const [rating, setRating] = useState(0);
     const [sportsPlaceName, setSportsPlaceName] = useState('');
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     useEffect(() => {
         // Fetch the name of the sports place based on the sportsPlaceId
@@ -20,7 +20,10 @@ export default function AddReview({ onAddReview, onClose, sportsPlaceId }) {
             .catch(error => {
                 console.error('Error fetching sports place name:', error);
             });
-    }, [sportsPlaceId]);
+
+        // Check if user is logged in
+        setIsLoggedIn(!!loggedInUser.userId);
+    }, [sportsPlaceId, loggedInUser]);
 
     AddReview.propTypes = {
         onReview: PropTypes.func.isRequired,
@@ -33,7 +36,8 @@ export default function AddReview({ onAddReview, onClose, sportsPlaceId }) {
             reviewText: reviewText,
             rating: rating,
             sportsPlaceId: sportsPlaceId,
-            sportsPlaceName: sportsPlaceName
+            sportsPlaceName: sportsPlaceName,
+            userId: loggedInUser.userId
         };
         onAddReview(reviewData);
         setReviewText('');
@@ -44,24 +48,30 @@ export default function AddReview({ onAddReview, onClose, sportsPlaceId }) {
 
     return (
         <div>
-            <TextField
-                margin="dense"
-                label="Kirjoita arviointi"
-                fullWidth
-                variant="standard"
-                value={reviewText}
-                onChange={event => setReviewText(event.target.value)}
-            />
-            <Rating
-                name="rating"
-                value={rating}
-                onChange={(event, newValue) => {
-                    setRating(newValue);
-                }}
-            />
-            <div style={{ marginTop: '10px' }}>
-                <Button onClick={handleSave}>Tallenna</Button> 
-            </div>
+            {isLoggedIn ? (
+                <>
+                    <TextField
+                        margin="dense"
+                        label="Kirjoita arviointi"
+                        fullWidth
+                        variant="standard"
+                        value={reviewText}
+                        onChange={event => setReviewText(event.target.value)}
+                    />
+                    <Rating
+                        name="rating"
+                        value={rating}
+                        onChange={(event, newValue) => {
+                            setRating(newValue);
+                        }}
+                    />
+                    <div style={{ marginTop: '10px' }}>
+                        <Button onClick={handleSave}>Tallenna</Button> 
+                    </div>
+                </>
+            ) : (
+                <p style={{ fontSize: '24px', fontWeight: 'bold' }}>Kirjaudu sisään jättääksesi arvostelun</p>
+            )}
         </div>
     );
 }

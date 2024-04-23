@@ -1,5 +1,7 @@
 
 import { useState, useEffect } from 'react';
+import Rating from '@mui/material/Rating';
+import Box from '@mui/material/Box';
 
 export default function PlaceReviews(sportsPlaceId) {
 
@@ -35,13 +37,16 @@ export default function PlaceReviews(sportsPlaceId) {
     return (
         <div>
             <h2>Arvostelut</h2>
-            <ul>
+            <ul style={{ listStyleType: 'none', padding: 0 }}>
                 {reviews.map(review => (
-                    <li key={review.id}>
-                        <h2>Arvostelijan nimi tähän</h2>
-                        {review.reviewText} <br/>
-                        <b>Arvosana: {review.rating}</b>
-                    </li>
+                    
+                   <li key={review.reviewId}>
+                   <Box border={4} p={2} mb={2}>
+                       <h2 style={{ fontFamily: 'Poppins'}}>{review.userName}</h2>
+                       <p style={{ fontFamily: 'Arial, sans-serif' , padding: '1px 0' }}>{review.reviewText}</p> <br/>
+                       <Rating value={review.rating} readOnly />
+                   </Box>
+               </li>
                 ))}
             </ul>
         </div>

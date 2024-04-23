@@ -45,6 +45,9 @@ export default function Map({ sports, index }) {
     const openPopup = (index) => {
       if (markerRefs.current.length > 0 && index !== null && index !== undefined) {
         markerRefs.current[index].openPopup();
+        const marker = markerRefs.current[index];
+        const latLng = marker.getLatLng();
+        mapRef.current.setView(latLng);
       }
     }
     openPopup(index);

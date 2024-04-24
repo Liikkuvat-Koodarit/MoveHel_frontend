@@ -1,20 +1,20 @@
 import React from "react";
 
-
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
+import Rating from '@mui/material/Rating';
 
 export default function EditReview(data) {
-    const [review, setReview] = React.useState({
-        reviewText: '', 
-        rating: '',
+  const [review, setReview] = React.useState({
+    reviewText: '',
+    rating: '',
 
-    });
-    const [open, setOpen] = React.useState(false);
+  });
+  const [open, setOpen] = React.useState(false);
   const handleClickOpen = () => {
     console.log(data.data.reviewText);
     console.log(data.data.sportsPlaceId);
@@ -22,8 +22,8 @@ export default function EditReview(data) {
     console.log("testi");
 
     setReview({
-            reviewText: data.data.reviewText,
-            rating: data.data.rating,
+      reviewText: data.data.reviewText,
+      rating: data.data.rating,
 
     });
     setOpen(true);
@@ -33,52 +33,52 @@ export default function EditReview(data) {
     setOpen(false);
   };
 
-  
+
 
   const handleInputChange = (e) => {
-    setReview({...review,[e.target.name]: e.target.value})
+    setReview({ ...review, [e.target.name]: e.target.value })
   }
 
   const updateReview = () => {
     data.updateReview(review, data.data.reviewId);
     console.log(review);
-    handleClose(); }
+    handleClose();
+  }
 
-    return(
-        <div>
-    <React.Fragment>
-      <Button variant="outlined" onClick={handleClickOpen}>
-        Muokkaa
-      </Button>
-      <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>Muokkaa arvostelua</DialogTitle>
-        <DialogContent>
-          <TextField
-            
-            margin="dense"
-            name="reviewText"
-            value={review.reviewText}
-            onChange={e => handleInputChange(e)}
-            label="Arvostelun teksti"
-            fullWidth
-          />
-          <TextField
-            
-            margin="dense"
-            name="rating"
-            value={review.rating}
-            onChange={e => handleInputChange(e)}
-            label="Arvosana"
-            fullWidth
-          />
-          
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={updateReview}>Save</Button>
-        </DialogActions>
-      </Dialog>
-    </React.Fragment>
-        </div>
-    );
+  return (
+    <div>
+      <React.Fragment>
+        <Button variant="outlined" onClick={handleClickOpen}>
+          Muokkaa
+        </Button>
+        <Dialog open={open} onClose={handleClose}>
+          <DialogTitle>Muokkaa arvostelua</DialogTitle>
+          <DialogContent>
+            <TextField
+
+              margin="dense"
+              name="reviewText"
+              variant="standard"
+              value={review.reviewText}
+              onChange={e => handleInputChange(e)}
+              label="Arvostelun teksti"
+              fullWidth
+            />
+
+            <Rating
+              name="rating"
+              value={review.rating}
+              onChange={e => handleInputChange(e)}
+
+            />
+
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleClose}>Cancel</Button>
+            <Button onClick={updateReview}>Save</Button>
+          </DialogActions>
+        </Dialog>
+      </React.Fragment>
+    </div>
+  );
 }

@@ -4,6 +4,7 @@ import AllReviews from './components/AllReviews';
 import ListAll from './components/ListAll';
 import AddUser from './components/AddUser';
 import Login from './components/Login';
+import Header from "./components/Header";
 
 function App() {
   const [selectedTab, setSelectedTab] = useState("home");
@@ -83,24 +84,26 @@ const logout = () => {
 
 
   return (
-    <div className='tabContainer'>
-      <div className="tabs">
-        <button onClick={() => handleTabChange("home")}>Etusivu</button>
-        <button onClick={() => handleTabChange("reviews")}>Arvostelut</button>
-      </div>
+    <div className="App">
       {loggedInUser.userId !== null ? (
-        <>
+        <div className='user'>
           <h3>Olet kirjautunut sisään</h3>
-          <button onClick={logout}>Kirjaudu ulos</button>
-        </>
+        </div>
       ) : (
-        <>
+        <div className='user'>
           <Login onLogin={login} />
           <AddUser onAddUser={addUser} />
-        </>
+        </div>
       )}
+    <Header title="Move H E L" subtitle="Lue ja kirjoita arvosteluja. Löydä juuri sinulle parhaat liikuntapaikat!" />
+    <div className='tabContainer'>
+      <div className="tabs">
+        <button class="button" onClick={() => handleTabChange("home")}>Etusivu</button>
+        <button class="button" onClick={() => handleTabChange("reviews")}>Omat sivut</button>
+      </div>
       {selectedTab === "home" && <ListAll loggedInUser={loggedInUser} />}
       {selectedTab === "reviews" && <AllReviews />}
+    </div>
     </div>
   );
 }

@@ -19,6 +19,8 @@ Käyttäjä pystyy:
 - React frontend
 - PostgreSQL tietokanta
 
+Linkki back endiin https://github.com/Liikkuvat-Koodarit/MoveHel_backend.git
+
 ### Asentaminen
 
 1. Repositoryn kloonaaminen
@@ -32,4 +34,6 @@ Käyttäjä pystyy:
 3. Sovelluksen käynnistäminen
 
    ```npm run dev```
+
+   
   

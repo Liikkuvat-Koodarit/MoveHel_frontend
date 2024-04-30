@@ -1,4 +1,6 @@
 # MoveHel
+![kuva](https://github.com/Liikkuvat-Koodarit/MoveHel_frontend/assets/143928416/cda4c22a-5818-4f5b-bc77-748532fa9720)
+
 Liikuntapaikka sovellus, jossa voi arvostella liikuntapaikkoja Helsingissä. Arvostelut auttavat käyttäjää valitsemaan itselle sopivan liikuntapaikan. 
 
 Web-pohjainen sovellus.

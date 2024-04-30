@@ -34,7 +34,7 @@ const PlaceSearch = ({ setUrl }) => {
     }
     //haku rakenne
     return (
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', paddingTop: '30px', borderTop: 'solid 1px black' }}>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             <Autocomplete
                 value={searchTerm}
                 options={options}
@@ -45,7 +45,7 @@ const PlaceSearch = ({ setUrl }) => {
                         label="Paikka"
                         variant="outlined"
                         style={{ width: '600px', marginRight: '10px' }}
-                       
+
                     />
                 )}
             />

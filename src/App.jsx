@@ -87,8 +87,8 @@ const logout = () => {
     <div className="App">
       {loggedInUser.userId !== null ? (
         <div className='user'>
-          <h3>Olet kirjautunut sisään</h3>
-          <button onClick={logout}>Kirjaudu ulos</button>
+          <h3>Olet kirjautunut sisään {loggedInUser.userName}</h3>
+          <button class="button" onClick={logout}>Kirjaudu ulos</button>
         </div>
       ) : (
         <div className='user'>
@@ -103,7 +103,7 @@ const logout = () => {
         <button class="button" onClick={() => handleTabChange("reviews")}>Omat sivut</button>
       </div>
       {selectedTab === "home" && <ListAll loggedInUser={loggedInUser} />}
-      {selectedTab === "reviews" && <AllReviews />}
+      {selectedTab === "reviews" && <AllReviews loggedInUser={loggedInUser} />}
     </div>
     </div>
   );

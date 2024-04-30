@@ -7,11 +7,15 @@ import EditReview from "./EditReview";
 import { Star } from '@mui/icons-material';
 
 
-function AllReviews() {
+function AllReviews({loggedInUser}) {
 
   const [reviews, setReviews] = useState([]);
 
-  const rest_url = 'http://127.0.0.1:5000/review'
+  const id = loggedInUser.userId;
+  const admin = loggedInUser.is_admin;
+
+  const rest_url = 'http://127.0.0.1:5000' + (admin ? '/reviews' : `/user/${id}/reviews`);
+  
   useEffect(() => { getReviews() }, [])
 
   const [columns] = useState([

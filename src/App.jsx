@@ -87,7 +87,7 @@ const logout = () => {
     <div className="App">
       {loggedInUser.userId !== null ? (
         <div className='user'>
-          <h3>Olet kirjautunut sisään {loggedInUser.userName}</h3>
+          <h3>Olet kirjautunut sisään, {loggedInUser.userName}</h3>
           <button class="button" onClick={logout}>Kirjaudu ulos</button>
         </div>
       ) : (

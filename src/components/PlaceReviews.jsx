@@ -36,7 +36,7 @@ export default function PlaceReviews({ sportsPlaceId }) {
     return (
         <div>
             <h2>Arvostelut</h2>
-            <p style={{ fontSize: '20px', fontWeight: 'bold' }}>Arvosteluiden keskiarvo: <Rating value={averageRating.toFixed(1)} readOnly /></p>
+            <p style={{ fontSize: '20px', fontWeight: 'bold' }}>Keskiarvo: <Rating value={averageRating.toFixed(1)} readOnly /></p>
             <ul style={{ listStyleType: 'none', padding: 0 }}>
                 {reviews.map(review => (
                     <li key={review.reviewId}>

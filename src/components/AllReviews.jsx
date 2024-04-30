@@ -19,9 +19,8 @@ function AllReviews({loggedInUser}) {
   useEffect(() => { getReviews() }, [])
 
   const [columns] = useState([
-    { field: 'sportsPlaceName', headerName: 'Paikan Nimi' },
-    { field: 'reviewId', headerName: 'Arvostelun ID' },
-    { field: 'reviewText', headerName: 'Teksti' },
+    { field: 'sportsPlaceName', headerName: 'Paikka' },
+    { field: 'reviewText', headerName: 'Arvostelu' },
     {
       field: 'rating',
       headerName: 'Arvosana',

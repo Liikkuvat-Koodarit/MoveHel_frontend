@@ -12,7 +12,7 @@ import PlaceReviews from "./PlaceReviews";
 import Map from "./Map";
 import PlaceIcon from '@mui/icons-material/Place';
 
-function ListAll({loggedInUser}) {
+function ListAll({ loggedInUser }) {
     //Luo tyhjän taulukon
     const [sports, setSports] = useState([]);
     const [isReviewOpen, setIsReviewOpen] = useState(false);
@@ -21,6 +21,7 @@ function ListAll({loggedInUser}) {
     const [popUpIndex, setPopUpIndex] = useState();
     const [url, setUrl] = useState(`http://lipas.cc.jyu.fi/api/sports-places?fields=schoolUse&fields=email&fields=type.name&fields=location.coordinates.tm35fin&fields=www&fields=location.geometries&fields=name&fields=type.typeCode&fields=location.locationId&fields=freeUse&fields=location.city.name&fields=location.city.cityCode&fields=phoneNumber&fields=location.neighborhood&fields=owner&fields=location.coordinates.wgs84&fields=location.address&pageSize=100&cityCodes=91&page=${page}`);
     const gridApiRef = useRef(null);
+
 
     //renderöi kerran
     useEffect(() => {
@@ -71,6 +72,7 @@ function ListAll({loggedInUser}) {
         },
     ];
     const gridOptions = {
+        overlayNoRowsTemplate: '<span class="ag-overlay-loading-center">Ladataan...</span>',
         headerHeight: 0
     }
 

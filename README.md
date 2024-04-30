@@ -1,20 +1,22 @@
 # MoveHel
 ![kuva](https://github.com/Liikkuvat-Koodarit/MoveHel_frontend/assets/143928416/cda4c22a-5818-4f5b-bc77-748532fa9720)
 
-Liikuntapaikka sovellus, jossa voi arvostella liikuntapaikkoja Helsingissä. Arvostelut auttavat käyttäjää valitsemaan itselle sopivan liikuntapaikan. 
+[Käy tutustumassa verkkosivuilla](https://movehel-frontend.onrender.com/)
 
-Web-pohjainen sovellus.
+MoveHEL on liikuntapaikka web-pohjainen sovellus, jossa käyttäjä voi arvostella liikuntapaikkoja Helsingissä. Arvostelut auttavat käyttäjää valitsemaan itselle sopivan liikuntapaikan. 
 
-Tällä hetkellä käyttäjä pystyy:
+Käyttäjä pystyy:
 - Näkemään listan liikuntapaikoista.
-- Hakemaan liikuntapaikkoja tyypin perusteella, esim. Kuntokeskus, pallokenttä tai liikuntapuisto.
+- Hakemaan liikuntapaikkoja paikan perusteella, esim. Kuntokeskus, pallokenttä tai liikuntapuisto.
 - Näkemään liikuntapaikan tiedot klikkaamalla paikkaa.
 - Lähettämään kirjallisen ja tähdellisen arvostelun.
 - Rekisteröitymään
-- Näkemään tietyn liikuntapaikan arvostelut
+- Näkemään tietyn liikuntapaikan arvostelut ja sen tähdellisen keskiarvon
 - Lisäämään, muokkaamaan ja poistamaan arvosteluja
 
 ### Teknologiat:
 - Python Flask backend
 - React frontend
 - PostgreSQL tietokanta
+
+  

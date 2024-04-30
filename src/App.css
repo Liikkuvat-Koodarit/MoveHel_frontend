@@ -24,12 +24,12 @@
   justify-content: end;
 }
 
-.button{
+.button {
   background-color: #1A80D9;
-  color : white;
+  color: white;
   font-family: 'Roboto', sans-serif;
   border-left: solid 1px white;
- 
+
   border-radius: 0;
 }
 

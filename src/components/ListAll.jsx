@@ -100,7 +100,7 @@ function ListAll({ loggedInUser }) {
 
     const addReview = (reviewData) => {
         console.log("Adding review:", reviewData);
-        fetch('http://localhost:5000/review', {
+        fetch('https://movehel-backend.onrender.com/review', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

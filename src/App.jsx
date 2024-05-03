@@ -15,7 +15,7 @@ function App() {
   };
 
   const addUser = (userData) => {
-    fetch('http://localhost:5000/user', {
+    fetch('https://movehel-backend.onrender.com/user', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -32,7 +32,7 @@ function App() {
   };
 
   const login = (loginData) => {
-    fetch('http://localhost:5000/login', {
+    fetch('https://movehel-backend.onrender.com/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -62,7 +62,7 @@ function App() {
   }
   
 const logout = () => {
-    fetch('http://localhost:5000/logout', {
+    fetch('https://movehel-backend.onrender.com/logout', {
       method: 'GET',
     })
       .then(response => {

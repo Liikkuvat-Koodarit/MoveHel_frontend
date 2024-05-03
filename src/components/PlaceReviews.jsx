@@ -10,7 +10,7 @@ export default function PlaceReviews({ sportsPlaceId }) {
     useEffect(() => {
         async function fetchReviews() {
             try {
-                const response = await fetch(`http://127.0.0.1:5000/location/review?sportsPlaceId=${id}`);
+                const response = await fetch(`https://movehel-backend.onrender.com/location/review?sportsPlaceId=${id}`);
                 if (!response.ok) {
                     throw new Error('Failed to fetch reviews');
                 }

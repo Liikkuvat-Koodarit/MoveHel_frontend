@@ -18,7 +18,8 @@ function App() {
     fetch('https://movehel-backend.onrender.com/user', {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': 'https://movehel-backend.onrender.com/'
       },
       body: JSON.stringify({
         ...userData

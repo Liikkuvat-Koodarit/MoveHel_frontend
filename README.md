@@ -14,6 +14,15 @@ Käyttäjä pystyy:
 - Näkemään tietyn liikuntapaikan arvostelut ja sen tähdellisen keskiarvon
 - Lisäämään, muokkaamaan ja poistamaan omia arvosteluja
 
+![kuva](https://github.com/Liikkuvat-Koodarit/MoveHel_frontend/assets/143928416/edf64ca5-ded9-4603-b31d-3553a15cb112)
+
+![kuva](https://github.com/Liikkuvat-Koodarit/MoveHel_frontend/assets/143928416/b46294c7-44b1-4835-8e7b-8f793dc52fff)
+
+![kuva](https://github.com/Liikkuvat-Koodarit/MoveHel_frontend/assets/143928416/06ed3c18-77cc-48e0-bba5-a86707e15e82)
+
+
+
+
 ### Teknologiat:
 - Python Flask backend
 - React frontend

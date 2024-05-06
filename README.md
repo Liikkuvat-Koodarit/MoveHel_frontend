@@ -35,5 +35,16 @@ Linkki back endiin https://github.com/Liikkuvat-Koodarit/MoveHel_backend.git
 
    ```npm run dev```
 
+### Jatkokehittäminen
+
+- Käyttäjä pystyy lisäämään omia suosikkejaan
+- Käyttäjä pystyy hakemaan yksittäisiä liikuntapaikkoja
+- Käyttäjien hallinta. Käyttäjä voi muuttaa oman salasanan, sähköpostin ja käyttäjätunnuksen.
+Admin voi poistaa tai blokata toisen käyttäjän. Admin voi antaa admin oikeudet käyttäjälle
+- Rekisteröinnin yhteydessä kirjautuminen suoraan järjestelmään
+
+
+
+
    
   

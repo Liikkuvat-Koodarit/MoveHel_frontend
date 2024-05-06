@@ -1,7 +1,7 @@
 # MoveHel
 ![kuva](https://github.com/Liikkuvat-Koodarit/MoveHel_frontend/assets/143928416/cda4c22a-5818-4f5b-bc77-748532fa9720)
 
-[Käy tutustumassa verkkosivuilla](https://movehel-frontend.onrender.com/)
+[Käy tutustumassa verkkosivuilla](https://movehel-frontend.onrender.com/) (Toimii osittain)
 
 MoveHEL on web-pohjainen liikuntapaikka sovellus, jossa käyttäjä voi arvostella liikuntapaikkoja Helsingissä. Arvostelut auttavat käyttäjää valitsemaan itselle sopivan liikuntapaikan. 
 
@@ -18,6 +18,7 @@ Käyttäjä pystyy:
 - Python Flask backend
 - React frontend
 - PostgreSQL tietokanta
+- Leaflet
 
 Linkki back endiin https://github.com/Liikkuvat-Koodarit/MoveHel_backend.git
 

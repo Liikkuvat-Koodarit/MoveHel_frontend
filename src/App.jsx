@@ -18,8 +18,7 @@ function App() {
     fetch('https://movehel-backend.onrender.com/user', {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': 'https://movehel-backend.onrender.com/'
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify({
         ...userData
@@ -28,7 +27,7 @@ function App() {
       .then(response => response.json())
       .then(data => console.log(data))
       .catch((error) => console.error('Not autehnticated', error));
-
+  
     console.log("Registering:", userData);
   };
 

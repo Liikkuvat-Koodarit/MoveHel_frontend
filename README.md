@@ -28,6 +28,7 @@ Käyttäjä pystyy:
 - React frontend
 - PostgreSQL tietokanta
 - Leaflet
+- Lipas
 
 Linkki back endiin https://github.com/Liikkuvat-Koodarit/MoveHel_backend.git
 
